@@ -142,17 +142,32 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         try {
-            // Note: Since we are in pure HTML/JS now, there's no process.env.
-            // A real backend URL would be hardcoded or injected here.
-            // For now, we simulate the network request exactly like the Next.js version did when env var was missing.
+            // Send Data to Google Apps Script Web App
+            // Note: The URL should be replaced with the actual deployment URL
+            const GOOGLE_SCRIPT_URL = "YOUR_GOOGLE_SCRIPT_WEB_APP_URL_HERE";
 
-            await new Promise(resolve => setTimeout(resolve, 1500));
-            console.log("Mock Submission Payload (Waiting for actual API link):", payload);
+            const response = await fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                // Important: Google Apps Script Web Apps usually require no-cors or specialized headers for simple JSON POSTs
+                // However, for returning JSON data (like the tracking ID), standard CORS POST or carefully constructed form-urlencoded data is often needed depending on the Script setup.
+                // Assuming the script is set to allow CORS and accept JSON:
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload)
+            });
 
-            const randomId = "MOCK-" + Math.floor(Math.random() * 90000 + 10000);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const responseData = await response.json();
+
+            // Assuming the Google Script returns JSON like: { status: "success", trackingId: "TBH-12345" }
+            const trackingId = responseData.trackingId || "ID-PENDING";
 
             // Show Success UI
-            trackingIdDisplay.textContent = randomId;
+            trackingIdDisplay.textContent = trackingId;
             regForm.classList.add('hidden');
             successScreen.classList.remove('hidden');
             regForm.reset();
