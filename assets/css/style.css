@@ -732,6 +732,7 @@ p {
     font-style: italic;
     display: -webkit-box;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
@@ -845,6 +846,7 @@ p {
 input[type="text"],
 input[type="tel"],
 input[type="number"],
+input[type="email"],
 textarea {
     width: 100%;
     background: #f8fafc;
