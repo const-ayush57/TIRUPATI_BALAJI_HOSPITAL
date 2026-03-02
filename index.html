@@ -247,6 +247,15 @@
                         </div>
 
                         <div class="input-group">
+                            <label>Email Address <span>*</span></label>
+                            <input type="email" id="emailInput" name="email" placeholder="e.g. j.doe@example.com"
+                                required>
+                            <span id="emailError" class="error-text hidden"
+                                style="color: var(--color-primary); font-size: 0.8rem; margin-top: 0.25rem;">Please
+                                enter a valid email address.</span>
+                        </div>
+
+                        <div class="input-group">
                             <label>Address <span>*</span></label>
                             <input type="text" name="address" placeholder="Full residential address" required>
                         </div>
@@ -278,7 +287,8 @@
                         <button type="submit" id="submitBtn" class="submit-btn shadow-lg">
                             <span class="submit-text">Submit Registration</span>
                             <span class="spinner hidden"><span
-                                    class="material-symbols-outlined spin">progress_activity</span> Processing...</span>
+                                    class="material-symbols-outlined spin">progress_activity</span>
+                                Processing...</span>
                         </button>
                     </form>
                 </div>

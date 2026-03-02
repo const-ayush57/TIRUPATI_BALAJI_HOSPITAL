@@ -101,6 +101,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const submitText = document.querySelector('.submit-text');
     const spinner = document.querySelector('.spinner');
     const formFields = regForm.querySelectorAll('input, textarea');
+    const emailInput = document.getElementById('emailInput');
+    const emailError = document.getElementById('emailError');
 
     const successScreen = document.getElementById('successScreen');
     const trackingIdDisplay = document.getElementById('trackingIdDisplay');
@@ -108,6 +110,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     regForm.addEventListener('submit', async (e) => {
         e.preventDefault();
+
+        // Basic Email Validation
+        const emailValue = emailInput.value.trim();
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(emailValue)) {
+            emailError.classList.remove('hidden');
+            emailInput.focus();
+            return;
+        } else {
+            emailError.classList.add('hidden');
+        }
 
         // Disable form UI
         submitBtn.disabled = true;
@@ -121,6 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
             timestamp: new Date().toISOString(),
             name: formData.get("fullName"),
             phone: formData.get("phone"),
+            email: formData.get("email"),
             address: formData.get("address"),
             age: formData.get("age"),
             gender: formData.get("gender"),
