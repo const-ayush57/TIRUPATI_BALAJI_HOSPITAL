@@ -95,6 +95,14 @@ p {
     background-color: var(--color-background-soft);
 }
 
+.bg-primary {
+    background-color: var(--color-primary);
+}
+
+.bg-action {
+    background-color: var(--color-action);
+}
+
 .text-primary {
     color: var(--color-primary);
 }
